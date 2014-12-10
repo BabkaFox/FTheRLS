@@ -6,7 +6,7 @@
  */
 
  #include "Point.h"
-#include "PointMove.h"
+#include "SObject.h"
 # define M_PI 3.14159265358979323846  /* pi */
 
 //конструктор для точки

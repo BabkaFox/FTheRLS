@@ -20,9 +20,15 @@
 #ifndef MOVE_H_
 #define MOVE_H_
 
-class PointMove{
+class SObject {
 
 private:
+	int sizeObjX;						//размер объекта. на данный момент, будет задаваться случайными числами от 5 до 12
+	int sizeObjY;
+	int sizeObjZ;
+	int objX;
+	int objY;
+	int objZ;
 	int N;							//Кол-во точек
 	int gamma;
 	float lyam;
@@ -31,14 +37,16 @@ private:
 	double sumUy;
 	double P;
 	double iprOL;
-//	std::vector<double> Uy;
-//	std::vector<double> Ux;
-//	std::vector<double> Ppr;
 	std::vector<Point> vPoint;		//массив Точек
+	std::vector<double> posObj;		//массив кординат объекта
 
 public:
-	PointMove(int N, double Vi, int gamma);		//конструктор класса вместо getPointMove
+	SObject() {
+	}
+
+	SObject(int N, double Vi, int gamma);		//конструктор класса вместо getPointMove
 	void move();
+
 	int getN() const;
 	int getGamma() const;
 	float getLyam() const;
@@ -47,10 +55,15 @@ public:
 	double getSumUx() const;
 	double getSumUy() const;
 	double getIprOL() const;
-//	std::vector<double> const &getUx() const;
-//	std::vector<double> const &getUy() const;
-//	std::vector<double> const &getPpr() const;
 	std::vector<Point> const &getVPoint() const;
+	//геттеры для получения размера объекта
+	int getSizeObjX() const;
+	int getSizeObjY() const;
+	int getSizeObjZ() const;
+	//геттеры для получения координат объекта
+	int getObjX() const;
+	int getObjY() const;
+	int getObjZ() const;
 };
 
 #endif /* MOVE_H_ */

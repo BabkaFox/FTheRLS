@@ -6,13 +6,17 @@
  */
 
 #include "Mosh.h"
+#include "SObject.h"
 # define M_PI 3.14159265358979323846  /* pi */
 using namespace std;
 
 //конструктор
-Mosh::Mosh(std::vector<Point> &vPoint){
-    this->vPoint = vPoint;
+//Mosh::Mosh(std::vector<Point> &vPoint){
+Mosh::Mosh(SObject &obj){
+    this->obj = obj;
+    this->vPoint = obj.getVPoint();
 }
+
 //первый алгоритм для подсчета мощности
 void Mosh::moshnost(){
     double P = 0, iprOL = 0, lyam = 0.03, R = 0;
@@ -62,9 +66,9 @@ void Mosh::writeResult(){
 
         fout.width(2);  fout<<fixed;fout << vPoint[i].getNumber() << " ";
         fout.width(7);  fout<<vPoint[i].getT()<< " ";
-        fout.width(10); fout<<vPoint[i].getXi()<<std::setprecision(2)<<"  ";
-        fout.width(10); fout<<vPoint[i].getYi()<<std::setprecision(2)<<"  ";
-        fout.width(10); fout<<vPoint[i].getZi()<<std::setprecision(2)<<"  ";
+        fout.width(10); fout<<vPoint[i].getXi()-obj.getObjX()<<std::setprecision(2)<<"  ";
+        fout.width(10); fout<<vPoint[i].getYi()-obj.getObjX()<<std::setprecision(2)<<"  ";
+        fout.width(10); fout<<vPoint[i].getZi()-obj.getObjX()<<std::setprecision(2)<<"  ";
         fout.width(10); fout<<vPoint[i].getRi()<<std::setprecision(8)<<"  ";
         fout.width(8);  fout<<vPoint[i].getSigma()<<std::setprecision(30) <<"  ";  //тут setprecision(30) <-- кол-во знаков для PPr
         fout.width(8);  fout<<Ppr[i]<<std::setprecision(2) <<"  ";              //печатаем PPr

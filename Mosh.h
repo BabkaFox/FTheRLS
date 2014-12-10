@@ -1,5 +1,6 @@
 #include "RLS.h"
 #include "Point.h"
+#include "SObject.h"
 #include <math.h>
 #include <cmath>
 #include <iostream>
@@ -10,6 +11,7 @@
 #include <iomanip>
 #include <sstream>
 #include <vector>
+#include "SObject.h"
 
 #ifndef MOSH_H_
 #define MOSH_H_
@@ -22,10 +24,11 @@ private:
     std::vector<double> Uy;
     std::vector<double> Ux;
     std::vector<double> Ppr;
-
+    SObject obj;                    //сюда положим объект
 public:
     //конструктор
-    Mosh(std::vector<Point> &vPoint);
+//    Mosh(std::vector<Point> &vPoint);
+    Mosh(SObject &obj);
     //первый алгоритм..бла-бла
     void moshnost();
     //запись в файл

@@ -18,8 +18,10 @@
 #include <cstdlib>
 #include "RLS.h"
 #include "Point.h"
-#include "PointMove.h"
+#include "SObject.h"
 #include "CountSign.h"
+#include "Mosh.h"
+
 using namespace std;
 
 int main() {
@@ -34,8 +36,8 @@ int main() {
 
 	int k = 1; //FIXME:Кол-во вызовов move. хз зачем это тут. Удалить если не нужно.
 
-	PointMove StartPointMove(N,Vi,gamma);		//Создали объект StartPointMove. и с помощью конструктора
-												// StartPointMove() проинициализировали его переменные
+	SObject StartPointMove(N,Vi,gamma);		//Создали объект StartPointMove. и с помощью конструктора
+											// StartPointMove() проинициализировали его переменные
 
 	/*while (k --> 0){
 		int tend=1000;
@@ -48,6 +50,9 @@ int main() {
 	}
 //	StartPointMove.Mosh();
 
+	Mosh mosh(StartPointMove);
+	mosh.moshnost();
+	mosh.writeResult();
 	return 0;
 }
 

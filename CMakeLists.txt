@@ -8,8 +8,8 @@ ConfigINI.h
 ConfigINI.cpp
 CountSign.cpp
 CountSign.h
-PointMove.cpp
-PointMove.h
+SObject.cpp
+SObject.h
 Point.cpp
 Point.h
 RLS.cpp
