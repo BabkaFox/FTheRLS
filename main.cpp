@@ -54,7 +54,7 @@ int main() {
 	MoveSObject sObject(StartPointMove);
 	Mosh mosh(sObject.getVSObject());
 	mosh.moshnost();
-	mosh.writeResult();
+	mosh.writeResult2();
 
 	return 0;
 }

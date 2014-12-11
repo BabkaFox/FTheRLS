@@ -18,9 +18,11 @@
 
 class Mosh{
 private:
-    double P;
-    double iprOL;
+//    double P;
+//    double iprOL;
 //    std::vector<Point> vPoint;		//массив Точек
+    std::vector<double> P;
+    std::vector<double> iprOL;
     std::vector<double> Uy;
     std::vector<double> Ux;
     std::vector<double> Ppr;
@@ -34,6 +36,7 @@ public:
     void moshnost();
     //запись в файл
     void writeResult();
+    void writeResult2();
 
 };
 

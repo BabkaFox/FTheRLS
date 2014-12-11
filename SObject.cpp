@@ -13,6 +13,7 @@ using namespace std;
 
 //конструктор
 SObject::SObject(int N, double Vi, int gamma) {
+	srand(time(NULL)); //Сброс рандомайзера
 
 	this->N = N;
 	this->Vi = Vi;
@@ -20,20 +21,20 @@ SObject::SObject(int N, double Vi, int gamma) {
 	this->tObj = 0.0;
 
 	//задаем размер объекту
-	this->sizeObjX = rand() % 5 + 12;
-	this->sizeObjY = rand() % 5 + 12;
-	this->sizeObjZ = rand() % 5 + 12;
+	this->sizeObjX = rand() % 12 + 5;
+	this->sizeObjY = rand() % 12 + 5;
+	this->sizeObjZ = rand() % 12 + 5;
 
 	//задаем координаты объекта
-	this->objX = rand() % 5 + 12;
-	this->objY = rand() % 5 + 12;
-	this->objZ = rand() % 5 + 12;
+	this->objX = rand() % 12 + 5;
+	this->objY = rand() % 12 + 5;
+	this->objZ = rand() % 12 + 5;
 
 	//задаем начальные координаты точкам с учетом местоположения объекта
 	for (int numb = 0; numb < N; ++numb){
-		double x = objX + rand() % (sizeObjX*sizeObjY*sizeObjZ + 1) + (-sizeObjX*sizeObjY*sizeObjZ/2);	//FIXME: рандом не правильно задает координаты
-		double y = objY + rand() % (sizeObjX*sizeObjY*sizeObjZ + 1) + (-sizeObjX*sizeObjY*sizeObjZ/2);
-		double z = objZ + rand() % (sizeObjX*sizeObjY*sizeObjZ + 1) + (-sizeObjX*sizeObjY*sizeObjZ/2);
+		double x = objX + rand() % (sizeObjX + 1) + (-sizeObjX);	//FIXME: рандом не правильно задает координаты
+		double y = objY + rand() % (sizeObjY + 1) + (-sizeObjY);
+		double z = objZ + rand() % (sizeObjZ + 1) + (-sizeObjZ);
 		double O = rand() % 360 + 1;  //от 0 до 360
 		double W = rand() % 360 + 1;
 		//В массив содаем и заносим объекты Point
@@ -43,7 +44,7 @@ SObject::SObject(int N, double Vi, int gamma) {
 
 }
 //конструктор2
-SObject::SObject(int N, double Vi, int gamma,double tObj, double x,double y,double z, int sizeObjX,int sizeObjY,int sizeObjZ) {
+SObject::SObject(int N, double Vi, int gamma,float tObj, double x,double y,double z, int sizeObjX,int sizeObjY,int sizeObjZ,std::vector<Point> vPoint) {
 
 	this->N = N;
 	this->Vi = Vi;
@@ -62,13 +63,13 @@ SObject::SObject(int N, double Vi, int gamma,double tObj, double x,double y,doub
 
 	//задаем начальные координаты точкам с учетом местоположения объекта
 	for (int numb = 0; numb < N; ++numb){
-		x = objX + rand() % (sizeObjX*sizeObjY*sizeObjZ + 1) + (-sizeObjX*sizeObjY*sizeObjZ/2);	//FIXME: рандом не правильно задает координаты
-		y = objY + rand() % (sizeObjX*sizeObjY*sizeObjZ + 1) + (-sizeObjX*sizeObjY*sizeObjZ/2);
-		z = objZ + rand() % (sizeObjX*sizeObjY*sizeObjZ + 1) + (-sizeObjX*sizeObjY*sizeObjZ/2);
-		double O = rand() % 360 + 1;  //от 0 до 360
-		double W = rand() % 360 + 1;
+		x = getVi()*cos(getGamma())*tObj+objX;
+		y = getVi()*sin(getGamma())*tObj+objY;
+		z = 0*tObj+objZ;
+		double O = vPoint[numb].getO();
+		double W = vPoint[numb].getW();  	//TODO: найти другое решение. а это это пздц какой то
 		//В массив содаем и заносим объекты Point
-		vPoint.push_back(Point(x,y,z,O,W,tObj,numb+1));
+		this->vPoint.push_back(Point(x,y,z,O,W,tObj,numb+1));
 	}
 
 
@@ -165,14 +166,18 @@ int SObject::getSizeObjZ() const {
 	return sizeObjX;
 }
 
-int SObject::getObjX() const {
+double SObject::getT() const {
+	return tObj;
+}
+
+double SObject::getObjX() const {
 	return objX;
 }
 
-int SObject::getObjY() const {
+double SObject::getObjY() const {
 	return objX;
 }
 
-int SObject::getObjZ() const {
+double SObject::getObjZ() const {
 	return objX;
 }

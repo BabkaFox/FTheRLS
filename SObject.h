@@ -29,7 +29,7 @@ private:
 	double objX;
 	double objY;
 	double objZ;
-	double tObj;
+	double tObj;					//время у объекта
 	int N;							//Кол-во точек
 	int gamma;
 	float lyam;
@@ -46,7 +46,7 @@ public:
 
 
 	SObject(int N, double Vi, int gamma);		//конструктор класса вместо getPointMove
-	SObject(int N, double Vi, int gamma, double tObj,double x,double y,double z, int sizeObjX,int sizeObjY,int sizeObjZ);		//конструктор класса вместо getPointMove
+	SObject(int N, double Vi, int gamma, float tObj,double x,double y,double z, int sizeObjX,int sizeObjY,int sizeObjZ,std::vector<Point> vPoint);		//конструктор класса вместо getPointMove
 	void move();
 
 	int getN() const;
@@ -63,10 +63,10 @@ public:
 	int getSizeObjY() const;
 	int getSizeObjZ() const;
 	//геттеры для получения координат объекта
-	int getObjX() const;
-	int getObjY() const;
-	int getObjZ() const;
-
+	double getObjX() const;
+	double getObjY() const;
+	double getObjZ() const;
+	double getT() const;
 
 	void setObjX(double objX) {
 		SObject::objX = objX;
@@ -83,6 +83,8 @@ public:
 	void setVPoint(std::vector<Point> const &vPoint) {
 		SObject::vPoint = vPoint;
 	}
+
+
 };
 
 #endif /* OBJ_H_ */
