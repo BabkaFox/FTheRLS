@@ -28,11 +28,11 @@ public:
 	Point(double Xi, double Yi, double Zi, double O, double W, float t, int number);
 
 	//Геттеры. Нужны для получения значений объекта Point. Const означает, что переменная не будет изменена(случайно)
-	double getXi();
-	double getYi();
-	double getZi();
-	double getO();
-	double getW();
+	double getXi()const;
+	double getYi()const;
+	double getZi()const;
+	double getO()const;
+	double getW()const;
 	double getRi() const;
 	double getSigma() const;
 	int getNumber() const;

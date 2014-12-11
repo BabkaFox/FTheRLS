@@ -1,8 +1,8 @@
 /*
- * Point.cpp
+ * Класс описывающий точку на объекте
  *
- *  Created on: 06.12.2014
- *      Author: �������
+ *
+ *
  */
 
  #include "Point.h"
@@ -47,23 +47,23 @@ Point::Point(double Xi, double Yi, double Zi, double O, double W, float t, int n
 
 }
 //Геттеры
-double Point::getXi() {
+double Point::getXi()const {
 	return Xi;
 }
 
-double Point::getYi() {
+double Point::getYi()const {
 	return Yi;
 }
 
-double Point::getZi() {
+double Point::getZi()const {
 	return Zi;
 }
 
-double Point::getO() {
+double Point::getO()const {
 	return O;
 }
 
-double Point::getW() {
+double Point::getW()const {
 	return W;
 }
 

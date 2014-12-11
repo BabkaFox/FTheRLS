@@ -1,8 +1,8 @@
 /*
- * Move.h
+ * Класс описывающий объект
  *
- *  Created on: 06.12.2014
- *      Author: �������
+ *
+ *
  */
 
 #include "RLS.h"
@@ -17,8 +17,8 @@
 #include <fstream>
 #include <iomanip>
 #include <sstream>
-#ifndef MOVE_H_
-#define MOVE_H_
+#ifndef OBJ_H_
+#define OBJ_H_
 
 class SObject {
 
@@ -26,9 +26,10 @@ private:
 	int sizeObjX;						//размер объекта. на данный момент, будет задаваться случайными числами от 5 до 12
 	int sizeObjY;
 	int sizeObjZ;
-	int objX;
-	int objY;
-	int objZ;
+	double objX;
+	double objY;
+	double objZ;
+	double tObj;
 	int N;							//Кол-во точек
 	int gamma;
 	float lyam;
@@ -38,13 +39,14 @@ private:
 	double P;
 	double iprOL;
 	std::vector<Point> vPoint;		//массив Точек
-	std::vector<double> posObj;		//массив кординат объекта
 
 public:
 	SObject() {
 	}
 
+
 	SObject(int N, double Vi, int gamma);		//конструктор класса вместо getPointMove
+	SObject(int N, double Vi, int gamma, double tObj,double x,double y,double z, int sizeObjX,int sizeObjY,int sizeObjZ);		//конструктор класса вместо getPointMove
 	void move();
 
 	int getN() const;
@@ -64,6 +66,23 @@ public:
 	int getObjX() const;
 	int getObjY() const;
 	int getObjZ() const;
+
+
+	void setObjX(double objX) {
+		SObject::objX = objX;
+	}
+
+	void setObjY(double objY) {
+		SObject::objY = objY;
+	}
+
+	void setObjZ(double objZ) {
+		SObject::objZ = objZ;
+	}
+
+	void setVPoint(std::vector<Point> const &vPoint) {
+		SObject::vPoint = vPoint;
+	}
 };
 
-#endif /* MOVE_H_ */
+#endif /* OBJ_H_ */

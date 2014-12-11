@@ -15,5 +15,7 @@ Point.h
 RLS.cpp
 RLS.h
 Mosh.cpp
-Mosh.h)
+Mosh.h
+MoveSObject.cpp
+MoveSObject.h)
 add_executable(Nirs ${SOURCE_FILES})

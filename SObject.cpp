@@ -1,11 +1,11 @@
 /*
- * Move.cpp
+ * Класс описывающий объект
  *
- *  Created on: 06.12.2014
- *      Author: �������
+ *
+ *
  */
 
-//------------����� �������� ��������� �����---------------//
+
 #include "SObject.h"
 #include "Mosh.h"
 # define M_PI 3.14159265358979323846  /* pi */
@@ -17,6 +17,7 @@ SObject::SObject(int N, double Vi, int gamma) {
 	this->N = N;
 	this->Vi = Vi;
 	this->gamma = gamma;
+	this->tObj = 0.0;
 
 	//задаем размер объекту
 	this->sizeObjX = rand() % 5 + 12;
@@ -37,6 +38,37 @@ SObject::SObject(int N, double Vi, int gamma) {
 		double W = rand() % 360 + 1;
 		//В массив содаем и заносим объекты Point
 		vPoint.push_back(Point(x,y,z,O,W,0.0,numb+1));
+	}
+
+
+}
+//конструктор2
+SObject::SObject(int N, double Vi, int gamma,double tObj, double x,double y,double z, int sizeObjX,int sizeObjY,int sizeObjZ) {
+
+	this->N = N;
+	this->Vi = Vi;
+	this->gamma = gamma;
+	this->tObj = tObj;
+
+	//задаем размер объекту
+	this->sizeObjX = sizeObjX;
+	this->sizeObjY = sizeObjY;
+	this->sizeObjZ = sizeObjZ;
+
+	//задаем координаты объекта
+	this->objX = x;
+	this->objY = y;
+	this->objZ = z;
+
+	//задаем начальные координаты точкам с учетом местоположения объекта
+	for (int numb = 0; numb < N; ++numb){
+		x = objX + rand() % (sizeObjX*sizeObjY*sizeObjZ + 1) + (-sizeObjX*sizeObjY*sizeObjZ/2);	//FIXME: рандом не правильно задает координаты
+		y = objY + rand() % (sizeObjX*sizeObjY*sizeObjZ + 1) + (-sizeObjX*sizeObjY*sizeObjZ/2);
+		z = objZ + rand() % (sizeObjX*sizeObjY*sizeObjZ + 1) + (-sizeObjX*sizeObjY*sizeObjZ/2);
+		double O = rand() % 360 + 1;  //от 0 до 360
+		double W = rand() % 360 + 1;
+		//В массив содаем и заносим объекты Point
+		vPoint.push_back(Point(x,y,z,O,W,tObj,numb+1));
 	}
 
 

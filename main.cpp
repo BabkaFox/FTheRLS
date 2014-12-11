@@ -21,11 +21,12 @@
 #include "SObject.h"
 #include "CountSign.h"
 #include "Mosh.h"
+#include "MoveSObject.h"
 
 using namespace std;
 
 int main() {
-
+	srand(time(NULL)); //Сброс рандомайзера
 	ConfigINI *ini = new ConfigINI("config.ini");
 
 	float Vi 	= ini->getIntValue("param", "V");
@@ -45,14 +46,16 @@ int main() {
 			StartPointMove.move(t);
 		}
 	}//while --k*/
-	while (k --> 0){
+	/*while (k --> 0){
 		StartPointMove.move();
-	}
+	}*/
 //	StartPointMove.Mosh();
 
-	Mosh mosh(StartPointMove);
+	MoveSObject sObject(StartPointMove);
+	Mosh mosh(sObject.getVSObject());
 	mosh.moshnost();
 	mosh.writeResult();
+
 	return 0;
 }
 
