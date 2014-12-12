@@ -18,7 +18,7 @@ MoveSObject::MoveSObject(SObject obj, RLS rls) {
     vSObject.push_back(obj); //получили один готовый объект(тело) сразу поместили его в массив перемещений
 //скорее всего в комментариях сказано не совсем то, что происходит на самом деле. например "вектор тела" может быть не вектором тела
 
-    //вектор тела
+/*    //вектор тела
     double vecObjX = obj.getObjX();
     double vecObjY = obj.getObjY();
 //    double vecObjZ = obj.getObjZ();
@@ -49,7 +49,24 @@ MoveSObject::MoveSObject(SObject obj, RLS rls) {
     //переводим в градусы
     double degTheta = theta*180/M_PI;
     std::cout<<degTheta;
-    //начинаем двигать цель
+    */
+
+    //вектор тела
+    double vecObjX = obj.getObjX();
+    double vecObjY = obj.getObjY();
+//    double vecObjZ = obj.getObjZ();
+
+    //строим треугольник
+    double vecRlsX = rls.getXrls() - vecObjX;
+    double vecRlsY = rls.getYrls() - vecObjY;
+
+    //гипотенуза
+    double gipgip = sqrt(vecRlsX*vecRlsX+vecRlsY*vecRlsY);
+
+    //находи угол в градусах
+    double degTheta = acos(vecRlsX/gipgip)*180/M_PI;
+
+//начинаем двигать цель
     double  Vx=0,Vy=0,Vz=0;
 
 
@@ -62,10 +79,15 @@ MoveSObject::MoveSObject(SObject obj, RLS rls) {
         double x = (Vx*t+vSObject[t/30-1].getObjX());
         double y = (Vy*t+vSObject[t/30-1].getObjY());
         double z = (Vz*t+vSObject[t/30-1].getObjZ());
+
+//        double x = cos(degTheta * (M_PI /180)) * obj.getVi() + vSObject[t/30-1].getObjX();
+//        double y = sin(degTheta * (M_PI /180)) * obj.getVi() + vSObject[t/30-1].getObjY();
 //        std::cout<<"X: "<<x<<" Y: "<<y<<" Z: "<<z<<std::endl;
         //Содаем и заносим объекты
         vSObject.push_back(SObject(obj.getN(),obj.getVi(),obj.getGamma(),t,x,y,z,obj.getSizeObjX(),obj.getSizeObjX(),obj.getSizeObjX(),obj.getVPoint()));
-//        std::cout<<"X: "<<vSObject[t/30-1].getObjX()<<" Y: "<<vSObject[t/30-1].getObjY()<<" Z: "<<vSObject[t/30-1].getObjZ()<<std::endl;
+        std::cout<<"X: "<<vSObject[t/30-1].getObjX()<<" Y: "<<vSObject[t/30-1].getObjY()<<" Z: "<<vSObject[t/30-1].getObjZ()<<std::endl;
+
+//        std::cout<<vX;
 
     }
 }
