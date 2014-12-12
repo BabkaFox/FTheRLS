@@ -50,8 +50,8 @@ MoveSObject::MoveSObject(SObject obj, RLS rls) {
 
 //        double x = (Vx*t+vSObject[t/30-1].getObjX());
 //        double y = (Vy*t+vSObject[t/30-1].getObjY());
-        double x = Vx * 1 + vSObject[t/30-1].getObjX();
-        double y = Vy * 1 + vSObject[t/30-1].getObjY();
+        double x = Vx * t + vSObject[t/30-1].getObjX();
+        double y = Vy * t + vSObject[t/30-1].getObjY();
 
         double z = (Vz*t+vSObject[t/30-1].getObjZ());
 //        std::cout<<"X: "<<x<<" Y: "<<y<<" Z: "<<z<<std::endl;
