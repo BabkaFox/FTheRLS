@@ -80,8 +80,8 @@ MoveSObject::MoveSObject(SObject obj, RLS rls) {
         double y = (Vy*t+vSObject[t/30-1].getObjY());
         double z = (Vz*t+vSObject[t/30-1].getObjZ());
 
-//        double x = cos(degTheta * (M_PI /180)) * obj.getVi() + vSObject[t/30-1].getObjX();
-//        double y = sin(degTheta * (M_PI /180)) * obj.getVi() + vSObject[t/30-1].getObjY();
+//        double x = cos(degTheta * (M_PI /180)) * t * obj.getVi() + vSObject[t/30-1].getObjX();
+//        double y = sin(degTheta * (M_PI /180)) * t * obj.getVi() + vSObject[t/30-1].getObjY();
 //        std::cout<<"X: "<<x<<" Y: "<<y<<" Z: "<<z<<std::endl;
         //Содаем и заносим объекты
         vSObject.push_back(SObject(obj.getN(),obj.getVi(),obj.getGamma(),t,x,y,z,obj.getSizeObjX(),obj.getSizeObjX(),obj.getSizeObjX(),obj.getVPoint()));
