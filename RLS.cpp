@@ -2,13 +2,13 @@
  * RLS.cpp
  *
  *  Created on: 06.12.2014
- *      Author: Евгения
+ *      Author: пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
  */
 
 #include "RLS.h"
 
 
-    void RLS::getRLS(int Xrls, int Yrls, int Zrls, int alpha, float lyam)
+    RLS::RLS(int Xrls, int Yrls, int Zrls, int alpha, float lyam)
     {
 	    this->Xrls = Xrls;
 		this->Yrls = Yrls;
@@ -27,4 +27,16 @@
 		lyam = 0.3;
 
 	}
+
+int RLS::getXrls() const {
+	return Xrls;
+}
+
+int RLS::getYrls() const {
+	return Yrls;
+}
+
+int RLS::getZrls() const {
+	return Zrls;
+}
 

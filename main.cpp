@@ -35,24 +35,16 @@ int main() {
 
 	delete ini;
 
-	int k = 1; //FIXME:Кол-во вызовов move. хз зачем это тут. Удалить если не нужно.
-
-	SObject StartPointMove(N,Vi,gamma);		//Создали объект StartPointMove. и с помощью конструктора
+	SObject sObject(N,Vi,gamma);		//Создали объект StartPointMove. и с помощью конструктора
 											// StartPointMove() проинициализировали его переменные
 
-	/*while (k --> 0){
-		int tend=1000;
-		for( int t=0; t<=tend; t+=30){
-			StartPointMove.move(t);
-		}
-	}//while --k*/
-	/*while (k --> 0){
-		StartPointMove.move();
-	}*/
-//	StartPointMove.Mosh();
+	RLS rls(23,16,1,1,1.0);					//Создаем объект RLS с координатами х = 25, у = 30, z = 1
 
-	MoveSObject sObject(StartPointMove);
-	Mosh mosh(sObject.getVSObject());
+	MoveSObject moveSObject(sObject, rls);	//Моделируем движение. Передаем объект с точками и РЛС
+
+
+
+	Mosh mosh(moveSObject.getVSObject());
 	mosh.moshnost();
 	mosh.writeResult2();
 

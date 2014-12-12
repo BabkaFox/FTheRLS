@@ -41,9 +41,6 @@ private:
 	std::vector<Point> vPoint;		//массив Точек
 
 public:
-	SObject() {
-	}
-
 
 	SObject(int N, double Vi, int gamma);		//конструктор класса вместо getPointMove
 	SObject(int N, double Vi, int gamma, float tObj,double x,double y,double z, int sizeObjX,int sizeObjY,int sizeObjZ,std::vector<Point> vPoint);		//конструктор класса вместо getPointMove
@@ -58,16 +55,19 @@ public:
 	double getSumUy() const;
 	double getIprOL() const;
 	std::vector<Point> const &getVPoint() const;
+
 	//геттеры для получения размера объекта
 	int getSizeObjX() const;
 	int getSizeObjY() const;
 	int getSizeObjZ() const;
+
 	//геттеры для получения координат объекта
 	double getObjX() const;
 	double getObjY() const;
 	double getObjZ() const;
 	double getT() const;
 
+	//сеттеры для установки значений
 	void setObjX(double objX) {
 		SObject::objX = objX;
 	}

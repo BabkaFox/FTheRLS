@@ -13,7 +13,6 @@ using namespace std;
 
 //конструктор
 SObject::SObject(int N, double Vi, int gamma) {
-	srand(time(NULL)); //Сброс рандомайзера
 
 	this->N = N;
 	this->Vi = Vi;
@@ -21,22 +20,22 @@ SObject::SObject(int N, double Vi, int gamma) {
 	this->tObj = 0.0;
 
 	//задаем размер объекту
-	this->sizeObjX = rand() % 12 + 5;
-	this->sizeObjY = rand() % 12 + 5;
-	this->sizeObjZ = rand() % 12 + 5;
+	this->sizeObjX = 12;
+	this->sizeObjY = 12;
+	this->sizeObjZ = 12;
 
-	//задаем координаты объекта
-	this->objX = rand() % 12 + 5;
-	this->objY = rand() % 12 + 5;
-	this->objZ = rand() % 12 + 5;
+	//задаем координаты объекта //на данный момент РЛС на координатах rls(25,30,0);
+	this->objX = 3;
+	this->objY = 2;
+	this->objZ = 12;
 
 	//задаем начальные координаты точкам с учетом местоположения объекта
 	for (int numb = 0; numb < N; ++numb){
-		double x = objX + rand() % (sizeObjX + 1) + (-sizeObjX);	//FIXME: рандом не правильно задает координаты
-		double y = objY + rand() % (sizeObjY + 1) + (-sizeObjY);
-		double z = objZ + rand() % (sizeObjZ + 1) + (-sizeObjZ);
-		double O = rand() % 360 + 1;  //от 0 до 360
-		double W = rand() % 360 + 1;
+		double x = 3;	//objX + rand() % (sizeObjX + 1) + (-sizeObjX);	//FIXME: рандом не правильно задает координаты
+		double y = 2;	//objY + rand() % (sizeObjY + 1) + (-sizeObjY);
+		double z = 4;	//objZ + rand() % (sizeObjZ + 1) + (-sizeObjZ);
+		double O = 152;	//rand() % 360 + 1;  //от 0 до 360
+		double W = 25;	//rand() % 360 + 1;
 		//В массив содаем и заносим объекты Point
 		vPoint.push_back(Point(x,y,z,O,W,0.0,numb+1));
 	}
@@ -63,9 +62,9 @@ SObject::SObject(int N, double Vi, int gamma,float tObj, double x,double y,doubl
 
 	//задаем начальные координаты точкам с учетом местоположения объекта
 	for (int numb = 0; numb < N; ++numb){
-		x = getVi()*cos(getGamma())*tObj+objX;
-		y = getVi()*sin(getGamma())*tObj+objY;
-		z = 0*tObj+objZ;
+		x = getVi()*cos(getGamma())*tObj+x;
+		y = getVi()*sin(getGamma())*tObj+y;
+		z = 0*tObj+z;
 		double O = vPoint[numb].getO();
 		double W = vPoint[numb].getW();  	//TODO: найти другое решение. а это это пздц какой то
 		//В массив содаем и заносим объекты Point
@@ -175,9 +174,9 @@ double SObject::getObjX() const {
 }
 
 double SObject::getObjY() const {
-	return objX;
+	return objY;
 }
 
 double SObject::getObjZ() const {
-	return objX;
+	return objZ;
 }

@@ -20,11 +20,11 @@ class MoveSObject {
 
 private:
 
-    std::vector<SObject> vSObject;		//массив Точек
+    std::vector<SObject> vSObject;		//массив перемещений объекта
 
 public:
 
-    MoveSObject(SObject &obj1);		//конструктор класса
+    MoveSObject(SObject obj, RLS rls);		//конструктор класса
     void move();
 
 

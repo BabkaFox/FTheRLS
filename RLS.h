@@ -2,7 +2,7 @@
  * RLS.h
  *
  *  Created on: 06.12.2014
- *      Author: �������
+ *      Author: �������
  */
 #include <fstream>
 #include <math.h>
@@ -11,19 +11,28 @@
 
 class RLS
 {
-    public:
+private:
 	int Xrls;
 	int Yrls;
 	int Zrls;
 	int alpha;
-
 	float Ri;
 	float Pri;
 	float lyam;
 
-	float getlyam();
-	void getRLS(int Xrls, int Yrls, int Zrls, int alpha, float lyam);
+public:
+	//Конструктор рлс
+	RLS(int Xrls, int Yrls, int Zrls, int alpha, float lyam);
 
+	//геттеры
+
+	int getXrls() const;
+	int getYrls() const;
+	int getZrls() const;
+	int getAlpha() const;
+	float getRi() const;
+	float getPri() const;
+	float getLyam() const;
 };
 
 
