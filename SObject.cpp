@@ -29,21 +29,19 @@ SObject::SObject(int N, double Vi, int gamma) {
 	this->objY = 2;
 	this->objZ = 12;
 
-	//задаем начальные координаты точкам с учетом местоположения объекта
+	//задаем начальные координаты точкам
 	for (int numb = 0; numb < N; ++numb){
-		double x = 3;	//objX + rand() % (sizeObjX + 1) + (-sizeObjX);	//FIXME: рандом не правильно задает координаты
-		double y = 2;	//objY + rand() % (sizeObjY + 1) + (-sizeObjY);
-		double z = 4;	//objZ + rand() % (sizeObjZ + 1) + (-sizeObjZ);
-		double O = 152;	//rand() % 360 + 1;  //от 0 до 360
-		double W = 25;	//rand() % 360 + 1;
+		double x = rand() % (sizeObjX + 1) + (-sizeObjX/2);
+		double y = rand() % (sizeObjY + 1) + (-sizeObjY/2);
+		double z = rand() % (sizeObjZ + 1) + (-sizeObjZ/2);
+		double O = rand() % 360 + 1;  //от 0 до 360
+		double W = rand() % 360 + 1;
 		//В массив содаем и заносим объекты Point
 		vPoint.push_back(Point(x,y,z,O,W,0.0,numb+1));
 	}
-
-
 }
-//конструктор2
-SObject::SObject(int N, double Vi, int gamma,float tObj, double x,double y,double z, int sizeObjX,int sizeObjY,int sizeObjZ,std::vector<Point> vPoint) {
+//конструктор2 получает новые X,Y,Z и предыдущий массив точек для получения старых координат
+SObject::SObject(int N, double Vi, int gamma,float tObj, double x,double y,double z, int sizeObjX,int sizeObjY,int sizeObjZ,vector<Point> vPoint) {
 
 	this->N = N;
 	this->Vi = Vi;
@@ -55,25 +53,22 @@ SObject::SObject(int N, double Vi, int gamma,float tObj, double x,double y,doubl
 	this->sizeObjY = sizeObjY;
 	this->sizeObjZ = sizeObjZ;
 
-	//задаем координаты объекта
+	//задаем новые координаты объекта
 	this->objX = x;
 	this->objY = y;
 	this->objZ = z;
 
-	//задаем начальные координаты точкам с учетом местоположения объекта
+	//задаем координаты точкам
 	for (int numb = 0; numb < N; ++numb){
-		x = getVi()*cos(getGamma())*tObj+x;
-		y = getVi()*sin(getGamma())*tObj+y;
-		z = 0*tObj+z;
+		x = x + vPoint[numb].getXi();
+		y = y + vPoint[numb].getYi();
+		z = z + vPoint[numb].getZi();
 		double O = vPoint[numb].getO();
 		double W = vPoint[numb].getW();  	//TODO: найти другое решение. а это это пздц какой то
 		//В массив содаем и заносим объекты Point
 		this->vPoint.push_back(Point(x,y,z,O,W,tObj,numb+1));
 	}
-
-
 }
-
 
 void SObject::move(){
 	//двигаем

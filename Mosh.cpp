@@ -118,28 +118,20 @@ void Mosh::writeResult(){
 void Mosh::writeResult2(){
 
     ofstream fout("k.txt", ios_base::trunc);
-//    fout.width(2);    fout<<"N"<<" ";
-    fout.width(7);    fout<<"t"<<" ";
+    fout.width(6);    fout<<"t"<<" ";
     fout.width(10);   fout<<"x"<<"  ";
     fout.width(10);   fout<<"y"<<"  ";
     fout.width(10);   fout<<"z"<<"  ";
-//    fout.width(10);   fout<<" R"<< "  ";
-//    fout.width(10);   fout<<" sigma "<< "  ";
     fout.width(10);   fout<<" Ppr "<< "  "<<endl;       //добавил вот это
 
     for (int j = 0; j < obj.size(); ++j) {
-//        for (int i = 0; i < obj[j].getVPoint().size(); ++i) {
-
-            fout.width(2);  fout<<fixed; //fout << obj[j].getVPoint()[i].getNumber() << " ";
+            fout.width(2);  fout<<fixed;
             fout.width(7);  fout<<obj[j].getT()<< " ";
             fout.width(10); fout<<obj[j].getObjX()<<std::setprecision(2)<<"  ";
             fout.width(10); fout<<obj[j].getObjY()<<std::setprecision(2)<<"  ";
-            fout.width(10); fout<<obj[j].getObjZ()<<std::setprecision(2)<<"  ";
-//            fout.width(10); fout<<obj[j].getVPoint()[i].getRi()<<std::setprecision(8)<<"  ";
-//            fout.width(8);  fout<<obj[j].getVPoint()[i].getSigma()<<std::setprecision(30) <<"  ";  //тут setprecision(30) <-- кол-во знаков для PPr
-            fout.width(8);  fout<<Ppr[j]<<std::setprecision(2) <<"  ";              //печатаем PPr
+            fout.width(10); fout<<obj[j].getObjZ()<<std::setprecision(80)<<"  ";
+            fout.width(8);  fout<<Ppr[j]<<std::setprecision(2)<<"  ";              //печатаем PPr
             fout<< endl;
-//        }
     }
 
 //    fout<<std::setprecision(15);fout << "P = "<<P;fout<<std::setprecision(2);fout<<"  iprOL = "<< iprOL << endl;

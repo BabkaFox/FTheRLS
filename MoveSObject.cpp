@@ -36,31 +36,19 @@ MoveSObject::MoveSObject(SObject obj, RLS rls) {
 //начинаем двигать цель
     double  Vx=0,Vy=0,Vz=0;
 
-
-//    Vx = obj.getVi()*cos(obj.getGamma()+degTheta);   //курс
-//    Vy = obj.getVi()*sin(obj.getGamma()+degTheta);
+    Vx = obj.getVi()*cos(obj.getGamma() + degTheta * (M_PI /180));
+    Vy = obj.getVi()*sin(obj.getGamma() + degTheta * (M_PI /180));
     Vz = 0;
 
-    Vx = obj.getVi()*cos(degTheta * (M_PI /180));
-    Vy = obj.getVi()*sin(degTheta * (M_PI /180));
-
-    std::cout<<Vx<<" "<<Vy<<" "<<Vz<<std::endl;
     int tend = 1000;
     for (int t = 30; t < tend; t+=30) {
-
-//        double x = (Vx*t+vSObject[t/30-1].getObjX());
-//        double y = (Vy*t+vSObject[t/30-1].getObjY());
         double x = Vx * t + vSObject[t/30-1].getObjX();
         double y = Vy * t + vSObject[t/30-1].getObjY();
-
         double z = (Vz*t+vSObject[t/30-1].getObjZ());
-//        std::cout<<"X: "<<x<<" Y: "<<y<<" Z: "<<z<<std::endl;
+
         //Содаем и заносим объекты
         vSObject.push_back(SObject(obj.getN(),obj.getVi(),obj.getGamma(),t,x,y,z,obj.getSizeObjX(),obj.getSizeObjX(),obj.getSizeObjX(),obj.getVPoint()));
-        std::cout<<"X: "<<vSObject[t/30-1].getObjX()<<" Y: "<<vSObject[t/30-1].getObjY()<<" Z: "<<vSObject[t/30-1].getObjZ()<<std::endl;
-
-//        std::cout<<vX;
-
+//        std::cout<<"X: "<<vSObject[t/30-1].getObjX()<<" Y: "<<vSObject[t/30-1].getObjY()<<" Z: "<<vSObject[t/30-1].getObjZ()<<std::endl;
     }
 }
 
