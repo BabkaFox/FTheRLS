@@ -86,20 +86,19 @@ void Mosh::writeResult2(){
     fout.width(10);   fout<<"y"<<"  ";
     fout.width(10);   fout<<"z"<<"  ";
     fout.width(10);   fout<<"R"<<"  ";
-    fout.width(17);   fout<<"P"<<"  ";
-    fout.width(25);   fout<<"Ppr"<<"  "<<endl;
+    fout.width(17);   fout<<"P"<<"  "<<endl;
+
 
     bool isWrote = false;
     for (int j = 0; j < obj.size(); ++j) {
-        if (obj[j].getFly() && !isWrote) {isWrote = true; fout.width(75); fout<<"Оп! Мы пролетели мимо"<<endl;}
+        if (obj[j].getFly() && !isWrote) {isWrote = true; fout.width(75); fout<<"Наш поворот! ...был. Мы пролетели мимо!"<<endl;}
             fout.width(2);  fout<<fixed<<setprecision(2)<<"  ";
             fout.width(7);  fout<<obj[j].getT()<<std::setprecision(2)<<"  ";
             fout.width(10); fout<<obj[j].getObjX()<<std::setprecision(2)<<"  ";
             fout.width(10); fout<<obj[j].getObjY()<<std::setprecision(2)<<"  ";
             fout.width(10); fout<<obj[j].getObjZ()<<std::setprecision(2)<<"  ";
             fout.width(10); fout<<obj[j].getR()<<std::setprecision(30)<<"  ";
-            fout.width(10); fout<<P[j]<<std::setprecision(32)<<"  ";
-            fout.width(8);  fout<<Ppr[j]<<std::setprecision(2)<<"  ";              //печатаем PPr
+            fout.width(10); fout<<P[j]<<std::setprecision(2)<<"  ";
             fout<<endl;
     }
     fout.close();

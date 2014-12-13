@@ -10,16 +10,9 @@
 #include <Windows.h>
 #include <time.h>
 #include <fstream>
-#include <string>
-#include <sstream>
-#include <cmath>
-#include <math.h>
 #include "ConfigINI.h"
-#include <cstdlib>
 #include "RLS.h"
-#include "Point.h"
 #include "SObject.h"
-#include "CountSign.h"
 #include "Mosh.h"
 #include "MoveSObject.h"
 
