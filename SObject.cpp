@@ -18,6 +18,10 @@ SObject::SObject(int N, double Vi, int gamma) {
 	this->Vi = Vi;
 	this->gamma = gamma;
 	this->tObj = 0.0;
+	this->isFly = false;	//Еще не пролетели мимо РЛС
+
+	//Начальное расстояние от цели до РЛС не получится посчитать. только после начала движения
+	this->R = 0;
 
 	//задаем размер объекту
 	this->sizeObjX = 12;
@@ -41,12 +45,14 @@ SObject::SObject(int N, double Vi, int gamma) {
 	}
 }
 //конструктор2 получает новые X,Y,Z и предыдущий массив точек для получения старых координат
-SObject::SObject(int N, double Vi, int gamma,float tObj, double x,double y,double z, int sizeObjX,int sizeObjY,int sizeObjZ,vector<Point> vPoint) {
+SObject::SObject(int N, double Vi, int gamma,float tObj,double R,bool isFly, double x,double y,double z, int sizeObjX,int sizeObjY,int sizeObjZ,vector<Point> vPoint) {
 
 	this->N = N;
 	this->Vi = Vi;
 	this->gamma = gamma;
 	this->tObj = tObj;
+	this->R = R;
+	this->isFly = isFly;
 
 	//задаем размер объекту
 	this->sizeObjX = sizeObjX;
@@ -70,48 +76,7 @@ SObject::SObject(int N, double Vi, int gamma,float tObj, double x,double y,doubl
 	}
 }
 
-void SObject::move(){
-	//двигаем
-	double  Vx=0,		//что-то типа начальных координат точек
-			Vy=0,
-			Vz=0;
-
-	Vx = getVi()*cos(getGamma());
-	Vy = getVi()*sin(getGamma());
-	Vz = 0;
-
-	int tend = 1000;
-	for (int numb = 0; numb < getN(); ++numb){
-		for (int t = 0; t < tend; t+=30) {
-			double x = (Vx*t+vPoint[numb].getXi());	//получение новой координаты Х путем сложения Вх+т со старой координатой
-			double y = (Vy*t+vPoint[numb].getYi());
-			double z = (Vz*t+vPoint[numb].getZi());
-			double O = vPoint[numb].getO();
-			double W = vPoint[numb].getW();
-			//Содаем и заносим объекты Point
-			vPoint.push_back(Point(x,y,z,O,W,t,numb+1));
-		}
-	}
-
-	/*for (int i = 0; i <vPoint.size(); ++i) {
-		cout<<"Точка: "<<vPoint[i].getNumber()
-				<<" X: "<<vPoint[i].getXi()
-				<<" Y: "<<vPoint[i].getYi()
-				<<" Z: "<<vPoint[i].getZi()
-				<<" O: "<<vPoint[i].getO()
-				<<" W: "<<vPoint[i].getW()
-				<<" t: "<<vPoint[i].getT()
-				<<endl;
-	}*/
-	//Создаем объект который будет считать мощность по разным алгоритмам
-
-	/*Mosh mosh(vPoint);
-	mosh.moshnost();
-	mosh.writeResult();*/
-}
-
-
-std::vector<Point> const &SObject::getVPoint() const {
+vector<Point> const &SObject::getVPoint() const {
 	return vPoint;
 }
 //Геттеры
@@ -174,4 +139,12 @@ double SObject::getObjY() const {
 
 double SObject::getObjZ() const {
 	return objZ;
+}
+
+double SObject::getR() const {
+	return R;
+}
+
+bool SObject::getFly() const {
+	return isFly;
 }

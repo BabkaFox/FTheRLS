@@ -30,6 +30,8 @@ private:
 	double objY;
 	double objZ;
 	double tObj;					//время у объекта
+	double R;						//Расстояние от объекта то РЛС
+	bool isFly;						//пролетели РЛС ? true : false
 	int N;							//Кол-во точек
 	int gamma;
 	float lyam;
@@ -41,10 +43,9 @@ private:
 	std::vector<Point> vPoint;		//массив Точек
 
 public:
-
-	SObject(int N, double Vi, int gamma);		//конструктор класса вместо getPointMove
-	SObject(int N, double Vi, int gamma, float tObj,double x,double y,double z, int sizeObjX,int sizeObjY,int sizeObjZ,std::vector<Point> vPoint);		//конструктор класса вместо getPointMove
-	void move();
+	//конструкторы
+	SObject(int N, double Vi, int gamma);
+	SObject(int N, double Vi, int gamma, float tObj,double R,bool isFly,double x,double y,double z, int sizeObjX,int sizeObjY,int sizeObjZ,std::vector<Point> vPoint);
 
 	int getN() const;
 	int getGamma() const;
@@ -66,6 +67,9 @@ public:
 	double getObjY() const;
 	double getObjZ() const;
 	double getT() const;
+	double getR() const;
+	bool getFly() const;
+
 
 	//сеттеры для установки значений
 	void setObjX(double objX) {
@@ -84,7 +88,9 @@ public:
 		SObject::vPoint = vPoint;
 	}
 
-
+	void setR(double R) {
+		SObject::R = R;
+	}
 };
 
 #endif /* OBJ_H_ */

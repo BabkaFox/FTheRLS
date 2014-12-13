@@ -26,11 +26,9 @@ private:
     std::vector<double> Uy;
     std::vector<double> Ux;
     std::vector<double> Ppr;
-//    SObject obj;                    //сюда положим объект
     std::vector<SObject> obj;
 public:
     //конструктор
-//    Mosh(std::vector<Point> &vPoint);
     Mosh(std::vector<SObject> obj);
     //первый алгоритм..бла-бла
     void moshnost();
