@@ -21,18 +21,20 @@ MoveSObject::MoveSObject(SObject obj, RLS rls) {
     //вектор тела
     double vecObjX = obj.getObjX();
     double vecObjY = obj.getObjY();
-//    double vecObjZ = obj.getObjZ();
 
     //строим треугольник
     double vecRlsX = rls.getXrls() - vecObjX;
     double vecRlsY = rls.getYrls() - vecObjY;
+
     //гипотенуза - расстояние от начала движения цели, до РЛС
     double gipgip = sqrt(vecRlsX*vecRlsX+vecRlsY*vecRlsY);
 
     //так как мы сразу не смогли найти расстояние. задаем его тут
     vSObject[0].setR(gipgip);
+
     //находим угол в градусах
     double degTheta = acos(vecRlsX/gipgip)*180/M_PI;
+
     //начинаем двигать цель
     double  Vx=0,Vy=0,Vz=0;
 
@@ -53,18 +55,19 @@ MoveSObject::MoveSObject(SObject obj, RLS rls) {
     }
     int tend = 1000;
     for (int t = 30; t < tend; t+=30) {
-        double x = Vx * t + vSObject[t/30-1].getObjX();
-        double y = Vy * t + vSObject[t/30-1].getObjY();
-        double z = (Vz*t+vSObject[t/30-1].getObjZ());
-        //строим новый треугольник, чтобы найти гипотенузу.
-        vecRlsX = rls.getXrls() - x;
-        vecRlsY = rls.getYrls() - y;
+        //находим расстояние на которое необходимо передвинуть объект
+        double x = Vx * t;
+        double y = Vy * t;
+        double z = Vz * t;
+        //строим новый треугольник учитывая новые координаты, чтобы найти гипотенузу.
+        vecRlsX = rls.getXrls() - (x + vSObject[t/30-1].getObjX());
+        vecRlsY = rls.getYrls() - (y + vSObject[t/30-1].getObjY());
 
         bool isFly = false;
         gipgip = sqrt(vecRlsX*vecRlsX+vecRlsY*vecRlsY);
         (vSObject[t/30-1].getR() < gipgip) ? isFly = true : isFly = false;
-        //Содаем и заносим объекты
-        vSObject.push_back(SObject(obj.getN(),obj.getVi(),obj.getGamma(),t,gipgip,isFly,x,y,z,obj.getSizeObjX(),obj.getSizeObjX(),obj.getSizeObjX(),obj.getVPoint()));
+        //передаем старый объект, новое время, новое расстояние до РЛС, ппролетел ли объект и на сколько нужно подвинуть новый
+        vSObject.push_back(SObject(vSObject[t/30-1],t,gipgip,isFly,x,y,z));
     }
 }
 

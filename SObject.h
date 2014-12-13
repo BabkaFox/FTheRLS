@@ -44,7 +44,7 @@ private:
 public:
 	//конструкторы
 	SObject(int N, double Vi, int gamma,int objX, int objY, int objZ);
-	SObject(int N, double Vi, int gamma, float tObj,double R,bool isFly,double x,double y,double z, int sizeObjX,int sizeObjY,int sizeObjZ,std::vector<Point> vPoint);
+	SObject(SObject oldObj, float tObj,double R,bool isFly,double x,double y,double z);
 
 	int getN() const;
 	int getGamma() const;

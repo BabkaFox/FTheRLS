@@ -23,8 +23,8 @@ private:
 //    std::vector<Point> vPoint;		//массив Точек
     std::vector<double> P;
     std::vector<double> iprOL;
-    std::vector<double> Uy;
-    std::vector<double> Ux;
+//    std::vector<double> Uy;
+//    std::vector<double> Ux;
     std::vector<double> Ppr;
     std::vector<SObject> obj;
 public:

@@ -34,9 +34,9 @@ SObject::SObject(int N, double Vi, int gamma, int objX, int objY, int objZ) {
 
 	//задаем начальные координаты точкам
 	for (int numb = 0; numb < N; ++numb){
-		double x = rand() % (sizeObjX + 1) + (-sizeObjX/2);
-		double y = rand() % (sizeObjY + 1) + (-sizeObjY/2);
-		double z = rand() % (sizeObjZ + 1) + (-sizeObjZ/2);
+		double x = (rand() % (sizeObjX + 1) + (-sizeObjX/2)) + objX;
+		double y = (rand() % (sizeObjY + 1) + (-sizeObjY/2)) + objY;
+		double z = (rand() % (sizeObjZ + 1) + (-sizeObjZ/2)) + objZ;
 		double O = rand() % 360 + 1;  //от 0 до 360
 		double W = rand() % 360 + 1;
 		//В массив содаем и заносим объекты Point
@@ -44,36 +44,38 @@ SObject::SObject(int N, double Vi, int gamma, int objX, int objY, int objZ) {
 	}
 }
 //конструктор2 получает новые X,Y,Z и предыдущий массив точек для получения старых координат
-SObject::SObject(int N, double Vi, int gamma,float tObj,double R,bool isFly, double x,double y,double z, int sizeObjX,int sizeObjY,int sizeObjZ,vector<Point> vPoint) {
 
-	this->N = N;
-	this->Vi = Vi;
-	this->gamma = gamma;
-	this->tObj = tObj;
-	this->R = R;
+SObject::SObject(SObject oldObj, float tObj, double R, bool isFly, double x, double y, double z) {
+	this->N = oldObj.getN();
+	this->Vi = oldObj.getVi();
+	this->gamma = oldObj.getGamma();
+	this->tObj = tObj;	//устанавливаем новое время
+	this->R = R;		//новое расстояние до рлс
 	this->isFly = isFly;
 
-	//задаем размер объекту
-	this->sizeObjX = sizeObjX;
-	this->sizeObjY = sizeObjY;
-	this->sizeObjZ = sizeObjZ;
+	//задаем размер объекту из старого
+	this->sizeObjX = oldObj.getSizeObjX();
+	this->sizeObjY = oldObj.getSizeObjY();
+	this->sizeObjZ = oldObj.getSizeObjZ();
 
 	//задаем новые координаты объекта
-	this->objX = x;
-	this->objY = y;
-	this->objZ = z;
+	this->objX = x + oldObj.getObjX();
+	this->objY = y + oldObj.getObjY();
+	this->objZ = z + oldObj.getObjZ();
 
 	//задаем координаты точкам
 	for (int numb = 0; numb < N; ++numb){
-		x = x + vPoint[numb].getXi();
-		y = y + vPoint[numb].getYi();
-		z = z + vPoint[numb].getZi();
-		double O = vPoint[numb].getO();
-		double W = vPoint[numb].getW();  	//TODO: найти другое решение. а это это пздц какой то
+		double Px = x + oldObj.getVPoint()[numb].getXi();
+		double Py = y + oldObj.getVPoint()[numb].getYi();
+		double Pz = z + oldObj.getVPoint()[numb].getZi();
+		double O = oldObj.getVPoint()[numb].getO();
+		double W = oldObj.getVPoint()[numb].getW();
 		//В массив содаем и заносим объекты Point
-		this->vPoint.push_back(Point(x,y,z,O,W,tObj,numb+1));
+		this->vPoint.push_back(Point(Px,Py,Pz,O,W,tObj,numb+1));
 	}
 }
+
+
 
 vector<Point> const &SObject::getVPoint() const {
 	return vPoint;
@@ -147,3 +149,5 @@ double SObject::getR() const {
 bool SObject::getFly() const {
 	return isFly;
 }
+
+

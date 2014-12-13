@@ -24,17 +24,17 @@ void Mosh::moshnost(){
         double R = obj[j].getR();
         for (int i = 0; i < obj[j].getVPoint().size(); ++i) {
             Ppr.push_back(0);
-            Ux.push_back(0);
-            Uy.push_back(0);
+//            Ux.push_back(0);
+//            Uy.push_back(0);
             double tempR =(obj[j].getVPoint()[i].getXi()*obj[j].getVPoint()[i].getXi())+(obj[j].getVPoint()[i].getYi()*obj[j].getVPoint()[i].getYi())+(obj[j].getVPoint()[i].getZi()*obj[j].getVPoint()[i].getZi());
             R=sqrt(tempR);
             double sigma = obj[j].getVPoint()[i].getSigma();
-            Ppr[j] = (Pper*Dper*Dpr*Fpr*Fper*sigma*lyam*lyam)/(pow(4.0*M_PI, 3.0)*(pow(R, 4.0)));
+            Ppr[i] = (Pper*Dper*Dpr*Fpr*Fper*sigma*lyam*lyam)/(pow(4.0*M_PI, 3.0)*(pow(R, 4.0)));
 
-            Ux[j] = (double) (sqrt(Ppr[j])*sin(2*M_PI*R/lyam));
-            Uy[j] = (double) (sqrt(Ppr[j])*cos(2*M_PI*R/lyam));
-            sumUx += Ux[j];
-            sumUy += Uy[j];
+//            Ux[i] = (double) (sqrt(Ppr[i])*sin(2*M_PI*R/lyam));
+//            Uy[i] = (double) (sqrt(Ppr[i])*cos(2*M_PI*R/lyam));
+            sumUx += sqrt(Ppr[i])*sin(2*M_PI*R/lyam);
+            sumUy += sqrt(Ppr[i])*cos(2*M_PI*R/lyam);
 
         }
 
