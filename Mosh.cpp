@@ -15,12 +15,13 @@ Mosh::Mosh(std::vector<SObject> obj){
 }
 
 void Mosh::moshnost(){
-    double P = 0, iprOL = 0, lyam = 0.03, R = 0;
+    double P = 0, iprOL = 0, lyam = 0.03;
     short int Pper=1, Dper=1, Fpr=1, Fper=1, Dpr=1;
 
 
     for (int j = 0; j < obj.size(); ++j) {
         double sumUx = 0, sumUy = 0;
+        double R = obj[j].getR();
         for (int i = 0; i < obj[j].getVPoint().size(); ++i) {
             Ppr.push_back(0);
             Ux.push_back(0);

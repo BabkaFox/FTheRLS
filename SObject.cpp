@@ -11,7 +11,7 @@
 using namespace std;
 
 //конструктор
-SObject::SObject(int N, double Vi, int gamma) {
+SObject::SObject(int N, double Vi, int gamma, int objX, int objY, int objZ) {
 
 	this->N = N;
 	this->Vi = Vi;
@@ -28,9 +28,9 @@ SObject::SObject(int N, double Vi, int gamma) {
 	this->sizeObjZ = 12;
 
 	//задаем координаты объекта //на данный момент РЛС на координатах rls(25,30,0);
-	this->objX = 3;
-	this->objY = 2;
-	this->objZ = 12;
+	this->objX = objX;
+	this->objY = objY;
+	this->objZ = objZ;
 
 	//задаем начальные координаты точкам
 	for (int numb = 0; numb < N; ++numb){
