@@ -31,10 +31,8 @@ MoveSObject::MoveSObject(SObject obj, RLS rls) {
 
     //так как мы сразу не смогли найти расстояние. задаем его тут
     vSObject[0].setR(gipgip);
-    std::cout<<gipgip<<std::endl;
     //находим угол в градусах
     double degTheta = acos(vecRlsX/gipgip)*180/M_PI;
-    std::cout<<degTheta<<std::endl;
     //начинаем двигать цель
     double  Vx=0,Vy=0,Vz=0;
 
@@ -58,7 +56,6 @@ MoveSObject::MoveSObject(SObject obj, RLS rls) {
         double x = Vx * t + vSObject[t/30-1].getObjX();
         double y = Vy * t + vSObject[t/30-1].getObjY();
         double z = (Vz*t+vSObject[t/30-1].getObjZ());
-//        std::cout<<" X "<<x<<" Y "<<y<<" Z"<<z<<std::endl;
         //строим новый треугольник, чтобы найти гипотенузу.
         vecRlsX = rls.getXrls() - x;
         vecRlsY = rls.getYrls() - y;
@@ -66,10 +63,8 @@ MoveSObject::MoveSObject(SObject obj, RLS rls) {
         bool isFly = false;
         gipgip = sqrt(vecRlsX*vecRlsX+vecRlsY*vecRlsY);
         (vSObject[t/30-1].getR() < gipgip) ? isFly = true : isFly = false;
-
         //Содаем и заносим объекты
         vSObject.push_back(SObject(obj.getN(),obj.getVi(),obj.getGamma(),t,gipgip,isFly,x,y,z,obj.getSizeObjX(),obj.getSizeObjX(),obj.getSizeObjX(),obj.getVPoint()));
-//        std::cout<<"X: "<<vSObject[t/30-1].getObjX()<<" Y: "<<vSObject[t/30-1].getObjY()<<" Z: "<<vSObject[t/30-1].getObjZ()<<std::endl;
     }
 }
 
