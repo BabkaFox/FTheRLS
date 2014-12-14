@@ -35,6 +35,7 @@ public:
     //запись в файл
     void writeResult();
     void writeResult2();
+    void writeResultTest();
 
 };
 

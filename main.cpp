@@ -25,24 +25,27 @@ int main() {
 	float Vi 	= ini->getIntValue("param", "V");
 	float gamma = ini->getIntValue("param", "gamma");
 	int N 	    = ini->getIntValue("param", "N");
-	int X 	    = ini->getIntValue("coord", "objX");
-	int Y 	    = ini->getIntValue("coord", "objY");
-	int Z 	    = ini->getIntValue("coord", "objZ");
+	int X 	    = ini->getIntValue("coord", "objX");//Начальные координаты объекта(цели)
+	int Y 	    = ini->getIntValue("coord", "objY");////Начальные координаты объекта(цели)
+	int Z 	    = ini->getIntValue("coord", "objZ");////Начальные координаты объекта(цели)
 
 	delete ini;
+	//Создаем объект sObject. и с помощью конструктора
+	//проинициализировали его переменные
+	SObject sObject(N,Vi,gamma,X,Y,Z);
 
-	SObject sObject(N,Vi,gamma,X,Y,Z);		//Создали объект StartPointMove. и с помощью конструктора
-											// StartPointMove() проинициализировали его переменные
+	//Создаем объект RLS с координатами х = 25, у = 30, z = 1
+	RLS rls(2,2,1,1,1.0);
 
-	RLS rls(2,2,1,1,1.0);					//Создаем объект RLS с координатами х = 25, у = 30, z = 1
+	//Моделируем движение. Передаем объект с точками и РЛС.
+	//Елси true - то перемещаемся змейкой. Иначе летим по прямой
+	MoveSObject moveSObject(sObject, rls, true);
 
-	MoveSObject moveSObject(sObject, rls);	//Моделируем движение. Передаем объект с точками и РЛС
-
-
-
+	//Мощьность сигнала
 	Mosh mosh(moveSObject.getVSObject());
 	mosh.moshnost();
 	mosh.writeResult2();
+//	mosh.writeResultTest();
 
 	return 0;
 }

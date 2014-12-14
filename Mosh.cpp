@@ -18,7 +18,6 @@ void Mosh::moshnost(){
     double P = 0, iprOL = 0, lyam = 0.03;
     short int Pper=1, Dper=1, Fpr=1, Fper=1, Dpr=1;
 
-
     for (int j = 0; j < obj.size(); ++j) {
         double sumUx = 0, sumUy = 0;
         double R = obj[j].getR();
@@ -30,7 +29,6 @@ void Mosh::moshnost(){
             R=sqrt(tempR);
             double sigma = obj[j].getVPoint()[i].getSigma();
             Ppr[i] = (Pper*Dper*Dpr*Fpr*Fper*sigma*lyam*lyam)/(pow(4.0*M_PI, 3.0)*(pow(R, 4.0)));
-
 //            Ux[i] = (double) (sqrt(Ppr[i])*sin(2*M_PI*R/lyam));
 //            Uy[i] = (double) (sqrt(Ppr[i])*cos(2*M_PI*R/lyam));
             sumUx += sqrt(Ppr[i])*sin(2*M_PI*R/lyam);
@@ -89,7 +87,6 @@ void Mosh::writeResult2(){
     fout.width(10);   fout<<"R"<<"  ";
     fout.width(17);   fout<<"P"<<"  "<<endl;
 
-
     bool isWrote = false;
     for (int j = 0; j < obj.size(); ++j) {
         if (obj[j].getFly() && !isWrote) {isWrote = true; fout.width(75); fout<<"Наш поворот! ...был. Мы пролетели мимо!"<<endl;}
@@ -101,6 +98,22 @@ void Mosh::writeResult2(){
             fout.width(10); fout<<obj[j].getR()<<std::setprecision(30)<<"  ";
             fout.width(10); fout<<P[j]<<std::setprecision(2)<<"  ";
             fout<<endl;
+    }
+    fout.close();
+}
+
+//Тесты графика
+void Mosh::writeResultTest(){
+    ofstream fout("k.txt", ios_base::trunc);
+    fout.width(4);   fout<<"x"<<"  ";
+    fout.width(4);   fout<<"y"<<"  "<<endl;
+    bool isWrote = false;
+    for (int j = 0; j < obj.size(); ++j) {
+        if (obj[j].getFly() && !isWrote) {isWrote = true; fout.width(75); fout<<"Наш поворот! ...был. Мы пролетели мимо!"<<endl;}
+        fout.width(2);  fout<<fixed<<setprecision(2)<<"  ";
+        fout.width(4); fout<<obj[j].getObjX()<<std::setprecision(2)<<";";
+        fout.width(4); fout<<obj[j].getObjY()<<std::setprecision(2)<<" ";
+        fout<<endl;
     }
     fout.close();
 }
